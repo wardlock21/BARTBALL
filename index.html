@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <title>
+        BART
+    </title>
+
+</head>
+
+<body>
+    <button onclick="generateUserID()" id="guserid">Generate ID</button>
+    <div id="uid"></div>
+    <div id="info">
+        <h3>First two rounds are considered as training rounds.</h3>
+        <h3>With Press button you can inflate balloon</h3>
+        <h3>With Collect you can collect cash for current round</h3>
+        <h3>If ballon didn't burst, then only you can earn cash</h3>
+        <h3>You can now start by pressing <i>Play</i>buuton </h3>
+        <button onclick="startplay()" id="infostart">Play</button>
+    </div>
+
+
+    <script>
+        function generateUserID() {
+
+            this.length = 8;
+            this.timestamp = +new Date;
+            var ts = this.timestamp.toString();
+            var parts = ts.split("").reverse();
+            var id = "";
+            var play = 'Play';
+            var _getRandomInt = function(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            for (var i = 0; i < this.length; ++i) {
+                var index = _getRandomInt(0, parts.length - 1);
+                id += parts[index];
+            }
+            $('#uid').show();
+            $('#uid').html(id);
+            $('#info').show();
+            $('#guserid').hide();
+        };
+
+        function startplay() {
+            $('#info').hide();
+            $('#bigwrap').show();
+            $('#round').show();
+
+        }
+
+    </script>
+
+
+    <div id="round"></div>
+
+    <div id="bigwrap">
+
+
+        <div id="ballonwrap">
+            <div id="message"></div>
+            <div id="gonext"></div>
+            <img src="Balloon.png" id="ballon" alt="Ballon">
+        </div>
+
+        <button type="button" id="press"></button>
+        <button type="button" id="collect"></button>
+
+        <div id="last_round">
+            <div id="last_term"></div>
+            <div id="last_value"></div>
+        </div>
+
+        <div id="total">
+            <div id="total_term"></div>
+            <div id="total_value"></div>
+        </div>
+
+
+    </div>
+
+    <div id="ssubmit">
+        <h3>Thank you for participating in survey</h3>
+        <div class="alert">Your Survey has been submitted</div>
+        <form id="surveyForm">
+            <p>
+                <label>User ID</label>
+                <input type="text" name="userId" id="userId" required>
+            </p>
+            <p>
+                <label>Number Of Pumps</label>
+                <input type="text" name="numberOfPumps" id="numberOfPumps">
+            </p>
+            <p>
+                <label>Number Of Expln</label>
+                <input type="text" name="noOfExplosen" id="noOfExplosen" required>
+            </p>
+            <p>
+                <label>Total Number</label>
+                <input type="text" name="Total" id="Total">
+            </p>
+            <p class="full">
+                <button type="submit">Submit</button>
+            </p>
+        </form>
+    </div>
+
+    <div id="saveThis1"></div>
+    <div id="saveThis2"></div>
+    <div id="saveThis3"></div>
+
+</body>
+
+</html>
