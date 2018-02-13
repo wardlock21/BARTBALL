@@ -21,7 +21,7 @@ $(document).ready(function () {
     var pumps;
     var total = 0; // money that has been earned in total
     var rounds_played = 12;
-    var explode_array = Array.from({length: 10}, () => Math.floor(Math.random() * 40));
+    var explode_array =  Array.from({length: 12}, () => Math.floor(Math.random() * 40));
     var maximal_pumps = 186;
     var pumpmeup; // number pumps in a given round; is updated each round
     var number_pumps = []; // arrays for saving number of pumps
@@ -47,7 +47,7 @@ $(document).ready(function () {
     var msg_end1 = '<p>This completes this part of the study. You are in the balloon game ';
     var msg_end2 = ' Taler profit made. </p><p> click on <i> Continue</i>, to continue with the study.</p>';
 
-    var err_msg = 'Error."';
+    var err_msg = 'Please press air into balloon';
     var messagesRef = firebase.database().ref('messages');
     document.getElementById('surveyForm').addEventListener('submit', submitForm);
 
