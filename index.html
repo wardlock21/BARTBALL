@@ -10,6 +10,7 @@
 
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
     <title>
         BART
@@ -18,15 +19,16 @@
 </head>
 
 <body>
-    <button onclick="generateUserID()" id="guserid">Generate ID</button>
+    <br>
+    <button class="btn btn-primary" onclick="generateUserID()" id="guserid">Generate ID</button>
     <div id="uid"></div>
     <div id="info">
         <h3>First two rounds are considered as training rounds.</h3>
         <h3>With Press button you can inflate balloon</h3>
         <h3>With Collect you can collect cash for current round</h3>
         <h3>If ballon didn't burst, then only you can earn cash</h3>
-        <h3>You can now start by pressing <i>Play</i>buuton </h3>
-        <button onclick="startplay()" id="infostart">Play</button>
+        <h3>You can now start by pressing <i>Play</i> buuton </h3>
+        <button class="btn btn-primary btn-lg " onclick="startplay()" id="infostart">Play</button>
     </div>
 
 
@@ -72,9 +74,10 @@
             <div id="gonext"></div>
             <img src="Balloon.png" id="ballon" alt="Ballon">
         </div>
-
-        <button type="button" id="press"></button>
-        <button type="button" id="collect"></button>
+        <br>
+        <button class="btn btn-primary" type="button" id="press"></button>
+        <hr>
+        <button class="btn btn-primary" type="button" id="collect"></button>
 
         <div id="last_round">
             <div id="last_term"></div>
@@ -91,33 +94,32 @@
 
     <div id="ssubmit">
         <h3>Thank you for participating in survey</h3>
-        <div class="alert">Your Survey has been submitted</div>
-        <form id="surveyForm">
-            <p>
-                <label>User ID</label>
-                <input type="text" name="userId" id="userId" required>
-            </p>
-            <p>
-                <label>Number Of Pumps</label>
-                <input type="text" name="numberOfPumps" id="numberOfPumps">
-            </p>
-            <p>
-                <label>Number Of Expln</label>
-                <input type="text" name="noOfExplosen" id="noOfExplosen" required>
-            </p>
-            <p>
-                <label>Total Number</label>
-                <input type="text" name="Total" id="Total">
-            </p>
-            <p class="full">
-                <button type="submit">Submit</button>
-            </p>
-        </form>
-    </div>
+        <div class="alert alert-success" role="alert">Your Survey has been submitted</div>
 
-    <div id="saveThis1"></div>
-    <div id="saveThis2"></div>
-    <div id="saveThis3"></div>
+        <form id="surveyForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="userId">User ID</label>
+                    <input type="text" class="form-control" id="userId">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="numberOfPumps">Number Of Pumps</label>
+                    <input type="text" class="form-control" id="numberOfPumps">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="noOfExplosen">Number Of Expln</label>
+                    <input type="text" class="form-control" id="noOfExplosen">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Total">Total Number</label>
+                    <input type="text" class="form-control" id="Total">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div
 
 </body>
 
