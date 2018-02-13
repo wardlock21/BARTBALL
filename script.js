@@ -21,7 +21,7 @@ $(document).ready(function () {
     var pumps;
     var total = 0; // money that has been earned in total
     var rounds_played = 12;
-    var explode_array = Array.from({length: 20}, () => Math.floor(Math.random() * 40));
+    var explode_array = Array.from({length: 10}, () => Math.floor(Math.random() * 40));
     var maximal_pumps = 186;
     var pumpmeup; // number pumps in a given round; is updated each round
     var number_pumps = []; // arrays for saving number of pumps
