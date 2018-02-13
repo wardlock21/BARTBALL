@@ -92,10 +92,6 @@ $(document).ready(function () {
         $('#gonext').remove();
         $('#round').remove();
         $('#last_round').remove();
-        //$('#goOn').show();
-        // $('#message').html(msg_end1+total+msg_end2).show();
-        // store_data(); // note: this function needs to be defined properly
-
         $('#ssubmit').show();
         store_data();
         $('#bigwrap').hide();
@@ -133,10 +129,6 @@ $(document).ready(function () {
             pieces: 48
         }, 1000);
 
-        // activate this if you have a sound file to play a sound
-        // when the balloon explodes:
-
-        // document.getElementById('explosion_sound').play();
     };
 
     // show button that starts next round
@@ -200,11 +192,7 @@ $(document).ready(function () {
         if (pumps === 0) {
             alert(err_msg);
         } else if (pumps > 0 && round > 2) { // only works after at least one pump has been made
-            exploded.push(explosion); // save whether balloon has exploded or not
-            // activate this if you have a sound file to play a sound
-            // when the balloon does not explode:
-
-            // document.getElementById('tada_sound').play(); 
+            exploded.push(explosion); // save whether balloon has exploded or not 
             number_pumps.push(pumps); // save number of pumps
             pumpmeup = pumps;
             pumps = -1; // makes pumping button unclickable until new round starts
@@ -241,14 +229,6 @@ $(document).ready(function () {
 
         }
     });
-
-    // continue button is shown when the game has ended. This needs to be replaced
-    // by a function that takes into account on which platform the BART runs (i.e.
-    // how will the page be submitted?)
-    //  $("#goOn").click(function () {
-    //    $("form[name=f1]").submit();
-    //    });
-
 
     function submitForm(e) {
         e.preventDefault();
