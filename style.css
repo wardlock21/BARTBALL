@@ -13,6 +13,7 @@ body {
 }
 
 
+
 #round {
   text-align: center;
   margin-left: auto;
@@ -105,13 +106,16 @@ body {
   text-align: right;
 }
 
-#press, #collect, #goOn, #gonext {
+ #goOn, #gonext {
   cursor: pointer;
-  background: #ddd;
+  background: #007bff;
+     border-color: #007bff;
 }
 
-#press:hover, #collect:hover, #goOn:hover, #gonext:hover {
-  background-color: #c2c2c2;
+ #goOn:hover, #gonext:hover {
+
+       background-color: #0069d9;
+  border-color: #0062cc;
 }
 
 #gonext {
@@ -128,60 +132,14 @@ body {
 }
 
 #ssubmit{
+     justify-content: center;
+    width: 100%;
+  max-width: 700px;
+  padding: 15px;
+  margin: 0 auto;
     display: none;
 }
-
-
-#ssubmit{
-  background:#f9feff;
-}
-
-/* FORM STYLES */
-#ssubmit form{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap:20px;
-}
-
-#ssubmit form label{
-  display:block;
-}
-
-#ssubmit form p{
-  margin:0;
-}
-
-#ssubmit form .full{
-  grid-column: 1 / 3;
-}
-
-#ssubmit form button, .contact form input, .contact form textarea{
-  width:100%;
-  padding:1em;
-  border:1px solid #c9e6ff;
-}
-
-#ssubmit form button{
-  background:#c9e6ff;
-  border:0;
-  text-transform: uppercase;
-}
-
-#ssubmit form button:hover,.contact form button:focus{
-  background:#92bde7;
-  color:#fff;
-  outline:0;
-  transition: background-color 2s ease-out;
-}
-
 .alert{
-  text-align: center;
-  padding:10px;
-  background:#79c879;
-  color:#fff;
-  margin-bottom:10px;
   display:none;
 }
-
-
 
