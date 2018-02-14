@@ -102,7 +102,7 @@ body {
   width: 50%;
 }
 
-#total_term, #last_term,,Current_term {
+#total_term, #last_term,#Current_term {
   text-align: right;
 }
 
