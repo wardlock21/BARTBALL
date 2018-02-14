@@ -97,12 +97,12 @@ body {
   width: 100%;
 }
 
-#total_term, #total_value, #last_term, #last_value,#Current_term, #Current_value {
+#total_term, #total_value, #last_term, #last_value, #Current_term, #Current_value {
   display: table-cell;
   width: 50%;
 }
 
-#total_term, #last_term,#Current_term {
+#total_term, #last_term, #Current_term {
   text-align: right;
 }
 
