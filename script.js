@@ -21,19 +21,21 @@ $(document).ready(function () {
     var pumps;
     var total = 0; // money that has been earned in total
     var rounds_played = 12;
-    var explode_array =  Array.from({length: 12}, () => Math.floor(Math.random() * 40));
+    var explode_array =  Array.from({length: 12}, () => Math.floor(Math.random() * 20));
     var maximal_pumps = 186;
     var pumpmeup; // number pumps in a given round; is updated each round
     var number_pumps = []; // arrays for saving number of pumps
     var exploded = []; // array for saving whether ballon has exploded
     var explosion; // will an explosion occur? 1 = yes, 0 = no
     var last_win = 0; // initialize variable that contains the win of the previous round
+    var current_win = 0;
 
     // initialize language
     var label_press = 'Press Ballon';
     var label_collect = 'Collect money';
     var label_balance = 'Balance:';
     var label_last = 'Last Round:';
+    var label_current = 'Current Round:';
     var label_currency = ' $';
     var label_header = 'Rounde NO ';
     var label_gonext1 = 'Next Round';
@@ -60,7 +62,9 @@ $(document).ready(function () {
     $('#total_value').html(total + label_currency);
     $('#last_term').html(label_last);
     $('#last_value').html(last_win + label_currency);
-
+    
+    $('#Current_value').html(current_win + label_currency);
+    $('#Current_term').html(label_current);
     // below: create functions that define game functionality
 
 
@@ -75,9 +79,13 @@ $(document).ready(function () {
         round += 1;
         size = start_size;
         pumps = 0;
+        current_win=pumps;
+        current_value();
+         $('#Current').show();
         $('#ballon').width(size);
         $('#ballon').height(size);
         $('#ballon').show();
+        
         $('#round').html('<h2>' + label_header + round + '<h2>');
         console.log(round);
 
@@ -92,20 +100,20 @@ $(document).ready(function () {
         $('#gonext').remove();
         $('#round').remove();
         $('#last_round').remove();
+        $('#Current').remove();
         $('#ssubmit').show();
         store_data();
         $('#bigwrap').hide();
     };
     
-    // Important: this function will have to be replaced to ensure that
-    // the data is actually sent to _your_ server: 
     var store_data = function () {
         var id1 = $('#uid').text();
         console.log(id1);
         $("#userId").val(id1);
         $("#numberOfPumps").val(number_pumps);
         $("#noOfExplosen").val(exploded);
-        $("#Total").val(total);
+        $("#Total").val(total.toFixed(2));
+        
 
     };
 
@@ -113,6 +121,7 @@ $(document).ready(function () {
     var explosion_message = function () {
         $('#collect').hide();
         $('#press').hide();
+        $('#Current').hide();
         $('#message').html(msg_explosion1 + msg_explosion2).show();
     };
 
@@ -120,6 +129,7 @@ $(document).ready(function () {
     var collected_message = function () {
         $('#collect').hide();
         $('#press').hide();
+        $('#Current').hide();
         $('#message').html(msg_collect1 + msg_collect2).show();
     };
 
@@ -129,6 +139,10 @@ $(document).ready(function () {
             pieces: 48
         }, 1000);
 
+        // activate this if you have a sound file to play a sound
+        // when the balloon explodes:
+
+        // document.getElementById('explosion_sound').play();
     };
 
     // show button that starts next round
@@ -143,11 +157,15 @@ $(document).ready(function () {
 
     // add money to bank
     var increase_value = function () {
-        $('#total_value').html((total*0.05) + label_currency);
+        $('#total_value').html((total*0.02).toFixed(2) + label_currency);
     };
 
     var show_last = function () {
-        $('#last_value').html((last_win*0.05) + label_currency);
+        $('#last_value').html((last_win*0.02).toFixed(2) + label_currency);
+    };
+    
+    var current_value = function(){
+         $('#Current_value').html((current_win*0.02).toFixed(2) + label_currency);
     };
 
     // button functionalities
@@ -157,6 +175,8 @@ $(document).ready(function () {
         if (pumps >= 0 && pumps < maximal_pumps) { // interacts with the collect function, which sets pumps to -1, making the button temporarily unclickable
             explosion = 0; // is set to one if pumping goes beyond explosion point; see below
             pumps += 1;
+             current_win =pumps; 
+                current_value();
             if (pumps < explode_array[round - 1]) {
                 size += increase;
                 $('#ballon').width(size);
@@ -164,6 +184,7 @@ $(document).ready(function () {
             } else if(round > 2) {
                 last_win = 0;
                 pumpmeup = pumps;
+                 
                 pumps = -1; // makes pumping button unclickable until new round starts
                 explosion = 1; // save that balloon has exploded this round
                 balloon_explode();
@@ -172,16 +193,19 @@ $(document).ready(function () {
                 setTimeout(explosion_message, 1200);
                 setTimeout(gonext_message, 1200);
                 setTimeout(show_last, 1200);
+
             }
             else if(round < 3){
                 last_win = 0;
                 pumpmeup = pumps;
+               
                 pumps = -1; // makes pumping button unclickable until new round starts
                 explosion = 1; // save that balloon has exploded this round
                 balloon_explode();
                 setTimeout(explosion_message, 1200);
                 setTimeout(gonext_message, 1200);
                 setTimeout(show_last, 1200);
+            
             }
         }
     });
@@ -192,7 +216,11 @@ $(document).ready(function () {
         if (pumps === 0) {
             alert(err_msg);
         } else if (pumps > 0 && round > 2) { // only works after at least one pump has been made
-            exploded.push(explosion); // save whether balloon has exploded or not 
+            exploded.push(explosion); // save whether balloon has exploded or not
+            // activate this if you have a sound file to play a sound
+            // when the balloon does not explode:
+
+            // document.getElementById('tada_sound').play(); 
             number_pumps.push(pumps); // save number of pumps
             pumpmeup = pumps;
             pumps = -1; // makes pumping button unclickable until new round starts
@@ -230,6 +258,7 @@ $(document).ready(function () {
         }
     });
 
+
     function submitForm(e) {
         e.preventDefault();
 
@@ -238,9 +267,15 @@ $(document).ready(function () {
         var NumberofPupms = getInputVal('numberOfPumps');
         var NumberofExpln = getInputVal('noOfExplosen');
         var Total = getInputVal('Total');
-
+        
+        var clientip;
+        $.get("https://ipinfo.io", function(response) {
+             clientip=response.ip;
+    
+        }, "jsonp");
         // Save message
-        saveMessage(UserID, NumberofPupms, NumberofExpln, Total);
+        console.log(clinentip);
+        saveMessage(UserID, NumberofPupms, NumberofExpln, Total,clientip);
 
         // Show alert
         document.querySelector('.alert').style.display = 'block';
@@ -253,14 +288,16 @@ $(document).ready(function () {
         // Clear form
         $('#surveyForm').hide();
     }
+    
 
-    function saveMessage(UserID, NumberofPupms, NumberofExpln, Total) {
+    function saveMessage(UserID, NumberofPupms, NumberofExpln, Total,clientip) {
         var newMessageRef = messagesRef.push();
         newMessageRef.set({
             UserID: UserID,
             NumberofPupms: NumberofPupms,
             NumberofExpln: NumberofExpln,
-            Total: Total
+            Total: Total,
+            ClientIp:clientip
         });
     }
 
