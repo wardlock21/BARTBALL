@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <title>
+        BART
+    </title>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">The Balloon Game</h1>
+        <br>
+        <button class="btn btn-primary" onclick="generateUserID()" id="guserid">Generate ID</button>
+        <div id="uid"></div>
+        <div id="info">
+            <p class="text-left">You will now play a game that gives you the chance to <strong>earn a bonus</strong>. Please read the following instructions carefully. </p>
+            <p class="text-left">On the next page, you will see a balloon and two buttons.</p>
+            <p class="text-left">You can pump the balloon by clicking the <strong><i>PUMP</i></strong> button.<strong> For each pump, you will earn $0.02</strong>. The more you inflate the balloon, the more money you earn. </p>
+            <p class="text-left">However, <strong>if you pump the balloon too much, it can pop !</strong> To collect the money earned for the balloon, you must click <strong><i>COLLECT $</i></strong> button before it pops, and then you will advance to the next balloon. </p>
+            <p class="text-left">If the balloon pops before you click the <strong><i>COLLECT $</i></strong> button, you will <strong>lose all the money</strong> you earned in that round and will advance to the next balloon.</p>
+            <p class="text-left">You will play this game for 12 rounds, but the first two rounds are trial. (You have the chance to earn bonus for the last 10 rounds.)</p>
+            <p class="text-left">Different balloons have different popping points, so it is <strong>NOT</strong> possible to know when each balloon will pop. However, the <strong>maximum number of pumps </strong>maximum number of pumps for each balloon is 20. </p>
+            <p class="text-left">*Your performance in the game will NOT affect the regular payment you will receive for participating in the study. </p>
+            <p class="text-left">When you are ready to start the trial round, please click <strong><i>PLAY</i></strong> at the bottom of your screen.</p>
+
+            <button class="btn btn-primary btn-lg " onclick="startplay()" id="infostart">Play</button>
+        </div>
+
+
+        <script>
+            function generateUserID() {
+
+                this.length = 8;
+                this.timestamp = +new Date;
+                var ts = this.timestamp.toString();
+                var parts = ts.split("").reverse();
+                var id = "";
+                var play = 'Play';
+                var _getRandomInt = function(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+                for (var i = 0; i < this.length; ++i) {
+                    var index = _getRandomInt(0, parts.length - 1);
+                    id += parts[index];
+                }
+                $('#uid').show();
+                $('#uid').html(id);
+                $('#info').show();
+                $('#guserid').hide();
+            };
+
+
+            function startplay() {
+                $('#info').hide();
+                $('#bigwrap').show();
+                $('#round').show();
+            }
+
+        </script>
+
+    </div>
+    <div id="ipad"></div>
+
+    <script type="application/javascript">
+        function getIP(json) {
+            //document.write("My public IP address is: ", json.ip);
+            $('#ipad').html(json.ip);
+        }
+
+    </script>
+
+    <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+
+    <div id="round"></div>
+
+    <div id="bigwrap">
+
+
+        <div id="ballonwrap">
+            <div id="message"></div>
+            <div id="gonext"></div>
+            <img src="Balloon.png" id="ballon" alt="Ballon">
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary" type="button" id="press"></button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary " type="button" id="collect"></button>
+            </div>
+
+        </div>
+
+        <div id="Current">
+            <div id="Current_term"></div>
+            <div id="Current_value"></div>
+        </div>
+        <div id="last_round">
+            <div id="last_term"></div>
+            <div id="last_value"></div>
+        </div>
+
+        <div id="total">
+            <div id="total_term"></div>
+            <div id="total_value"></div>
+        </div>
+
+
+
+    </div>
+
+    <div id="ssubmit">
+        <h3 class="text-center">Thank you for participating in survey</h3>
+        <div class="alert alert-success" role="alert">Your Survey has been submitted</div>
+
+        <form id="surveyForm">
+            <div id="notshow">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="userId">User ID</label>
+                        <input type="text" class="form-control" id="userId">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="numberOfPumps">Number Of Pumps</label>
+                        <input type="text" class="form-control" id="numberOfPumps">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="noOfExplosen">Number Of Expln</label>
+                        <input type="text" class="form-control" id="noOfExplosen">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Total">Total Number</label>
+                        <input type="text" class="form-control" id="Total">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="TotalMoney">Total Money Earned</label>
+                        <input type="text" class="form-control" id="TotalMoney">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="userIP">Client IP</label>
+                        <input type="text" class="form-control" id="userIP">
+                    </div>
+                </div>
+
+            </div>
+            <div id="EarnM" class="text-center"></div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+</body>
+
+</html>
