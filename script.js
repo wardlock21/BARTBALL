@@ -304,6 +304,7 @@ $(document).ready(function () {
 
         // Clear form
         $('#surveyForm').hide();
+        window.location = "https://ubcbusiness.qualtrics.com/jfe/form/SV_2uEXrMHhS6O59dz";
     }
     
     
