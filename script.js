@@ -3,12 +3,12 @@
 $(document).ready(function () {
 
     var config = {
-        apiKey: "AIzaSyAa0tNM_tescIisPKy2ITjW54SnhV5Dxcs",
-        authDomain: "bartgameubc2018.firebaseapp.com",
-        databaseURL: "https://bartgameubc2018.firebaseio.com",
-        projectId: "bartgameubc2018",
-        storageBucket: "bartgameubc2018.appspot.com",
-        messagingSenderId: "495232641371"
+        apiKey: "AIzaSyCQD8-6FZebvC-rqaiAQtJumVc_aOvGRh0",
+    authDomain: "survey-b0ce3.firebaseapp.com",
+    databaseURL: "https://survey-b0ce3.firebaseio.com",
+    projectId: "survey-b0ce3",
+    storageBucket: "survey-b0ce3.appspot.com",
+    messagingSenderId: "390860367232"
     };
     firebase.initializeApp(config);
     var saveThis = 'hidden'; // text fields that saves data should not be shown; can be shown in testing
